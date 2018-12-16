@@ -3,56 +3,6 @@ package com.kodilla.testing.shape;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-interface Shape{
-    String getShapeName();
-    double getField();
-}
-
-class Rectangle implements Shape
-{
-    double field;
-
-    Rectangle(){
-        this.field = 15.8;
-    }
-    public String getShapeName(){
-        return this.getClass().getSimpleName();
-    }
-    public double getField(){
-        return field;
-    }
-}
-
-class Circle implements Shape
-{
-    double field;
-
-    Circle(){
-        this.field=25.4;
-    }
-
-    public String getShapeName(){
-        return this.getClass().getSimpleName();
-    }
-    public double getField(){
-        return field;
-    }
-}
-
-class Triangle implements Shape
-{
-    double field;
-
-    Triangle(){
-        this.field=12.6;
-    }
-    public String getShapeName(){
-        return this.getClass().getSimpleName();
-    }
-    public double getField(){
-        return field;
-    }
-}
 
 public class ShapeCollector
 {
