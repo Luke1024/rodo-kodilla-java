@@ -89,7 +89,6 @@ public class ForumStatisticsTestSuite {
         Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
         Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
         forumStat.showStatistics();
-
     }
     @Test
     public void testCaseNoComments(){

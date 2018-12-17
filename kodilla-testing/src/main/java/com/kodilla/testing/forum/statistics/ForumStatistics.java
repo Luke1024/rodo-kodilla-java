@@ -16,7 +16,6 @@ public class ForumStatistics
 
     public ForumStatistics(Statistics statistics){
         this.statistics = statistics;
-
     }
 
     public void calculateAdvStatistics(){
