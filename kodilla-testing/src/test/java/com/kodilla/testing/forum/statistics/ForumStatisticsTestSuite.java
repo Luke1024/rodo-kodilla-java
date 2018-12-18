@@ -30,12 +30,13 @@ public class ForumStatisticsTestSuite {
     public void testCaseNoPost(){
         Statistics statisticsMock = mock(Statistics.class);
 
-        int usersCount = 15;
+        //expected values
+        int usersCount = 42;
         int postsCount = 0;
         int commentsCount = 0;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        double postAvgPerUser = 0;
+        double commentsAvgPerUser = 0;
+        double commentsAvgPerPost = 0;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -50,24 +51,25 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: no posts");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCase1000Post(){
         Statistics statisticsMock = mock(Statistics.class);
 
+        //expected values
         int usersCount = 15;
         int postsCount = 1000;
         int commentsCount = 2300;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        double postAvgPerUser = 66.66 ;
+        double commentsAvgPerUser = 153.33;
+        double commentsAvgPerPost = 2.3;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -82,24 +84,26 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: 1000 posts");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCaseNoComments(){
         Statistics statisticsMock = mock(Statistics.class);
 
+
+        //expected values
         int usersCount = 15;
-        int postsCount = 10;
+        int postsCount = 1000;
         int commentsCount = 0;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        double postAvgPerUser = 66.66 ;
+        double commentsAvgPerUser = 0;
+        double commentsAvgPerPost = 0;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -114,24 +118,25 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: no comments");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCaseMorePostsThanComments(){
         Statistics statisticsMock = mock(Statistics.class);
 
+        //expected values
         int usersCount = 15;
-        int postsCount = 500;
-        int commentsCount = 10;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        int postsCount = 1000;
+        int commentsCount = 650;
+        double postAvgPerUser = 66.66 ;
+        double commentsAvgPerUser = 43.33;
+        double commentsAvgPerPost = 0.65;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -146,24 +151,25 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: more posts than comments");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCaseMoreCommentsThanPosts(){
         Statistics statisticsMock = mock(Statistics.class);
 
-        int usersCount = 15;
-        int postsCount = 3;
-        int commentsCount = 10;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        //expected values
+        int usersCount = 456;
+        int postsCount = 5465;
+        int commentsCount = 12304;
+        double postAvgPerUser = 11.98 ;
+        double commentsAvgPerUser = 26.98;
+        double commentsAvgPerPost = 2.25;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -178,24 +184,25 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: more comments than posts");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCaseNoUsers(){
         Statistics statisticsMock = mock(Statistics.class);
 
+        //expected values
         int usersCount = 0;
         int postsCount = 0;
         int commentsCount = 0;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        double postAvgPerUser = 0;
+        double commentsAvgPerUser = 0;
+        double commentsAvgPerPost = 0;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -210,24 +217,25 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: no users");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
     @Test
     public void testCase100Users(){
         Statistics statisticsMock = mock(Statistics.class);
 
+        //expected values
         int usersCount = 100;
-        int postsCount = 230;
-        int commentsCount = 350;
-        double postAvgPerUser = Double.valueOf(postsCount)/usersCount;
-        double commentsAvgPerUser = Double.valueOf(commentsCount)/usersCount;
-        double commentsAvgPerPost = Double.valueOf(commentsCount)/postsCount;
+        int postsCount = 525;
+        int commentsCount = 640;
+        double postAvgPerUser = 5.25 ;
+        double commentsAvgPerUser = 6.4;
+        double commentsAvgPerPost = 1.21;
 
         List<String> users = new ArrayList<>();
         for(int u=0; u<usersCount; u++){
@@ -242,12 +250,12 @@ public class ForumStatisticsTestSuite {
 
         System.out.println("Testing case: 100 users");
 
-        Assert.assertEquals(usersCount, forumStat.usersCount);
-        Assert.assertEquals(postsCount, forumStat.postsCount);
-        Assert.assertEquals(commentsCount, forumStat.commentsCount);
-        Assert.assertEquals(postAvgPerUser, forumStat.postAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerUser, forumStat.commentsAvgPerUser, 0.01);
-        Assert.assertEquals(commentsAvgPerPost, forumStat.commentsAvgPerPost, 0.01);
+        Assert.assertEquals(usersCount, forumStat.getUsersCount());
+        Assert.assertEquals(postsCount, forumStat.getPostsCount());
+        Assert.assertEquals(commentsCount, forumStat.getCommentsCount());
+        Assert.assertEquals(postAvgPerUser, forumStat.getPostAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerUser, forumStat.getCommentsAvgPerUser(), 0.01);
+        Assert.assertEquals(commentsAvgPerPost, forumStat.getCommentsAvgPerPost(), 0.01);
         forumStat.showStatistics();
     }
 }
