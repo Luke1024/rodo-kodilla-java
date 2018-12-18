@@ -7,8 +7,6 @@ public class ForumStatistics
 {
     Statistics statistics;
 
-
-
     private int usersCount;
     private int postsCount;
     private int commentsCount;
