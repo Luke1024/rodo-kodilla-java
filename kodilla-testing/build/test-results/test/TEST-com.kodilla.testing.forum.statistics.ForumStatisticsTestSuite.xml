@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" tests="7" skipped="0" failures="0" errors="0" timestamp="2018-12-19T13:48:29" hostname="base_pc" time="0.1">
+  <properties/>
+  <testcase name="testCaseNoPost" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.091"/>
+  <testcase name="testCaseMoreCommentsThanPosts" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <testcase name="testCase1000Post" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <testcase name="testCase100Users" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <testcase name="testCaseMorePostsThanComments" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <testcase name="testCaseNoComments" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <testcase name="testCaseNoUsers" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
+  <system-out><![CDATA[Test Suite: begin
+Test Case: begin
+Testing case: no posts
+Number of users: 42
+Number of posts: 0
+Number of comments: 0
+Average number of posts per user: 0.0
+Average number of comments per user: 0.0
+Average number of comments per post: 0.0
+Test Case: end
+
+Test Case: begin
+Testing case: more comments than posts
+Number of users: 456
+Number of posts: 5465
+Number of comments: 12304
+Average number of posts per user: 11.984649122807017
+Average number of comments per user: 26.982456140350877
+Average number of comments per post: 2.2514181152790487
+Test Case: end
+
+Test Case: begin
+Testing case: 1000 posts
+Number of users: 15
+Number of posts: 1000
+Number of comments: 2300
+Average number of posts per user: 66.66666666666667
+Average number of comments per user: 153.33333333333334
+Average number of comments per post: 2.3
+Test Case: end
+
+Test Case: begin
+Testing case: 100 users
+Number of users: 100
+Number of posts: 525
+Number of comments: 640
+Average number of posts per user: 5.25
+Average number of comments per user: 6.4
+Average number of comments per post: 1.2190476190476192
+Test Case: end
+
+Test Case: begin
+Testing case: more posts than comments
+Number of users: 15
+Number of posts: 1000
+Number of comments: 650
+Average number of posts per user: 66.66666666666667
+Average number of comments per user: 43.333333333333336
+Average number of comments per post: 0.65
+Test Case: end
+
+Test Case: begin
+Testing case: no comments
+Number of users: 15
+Number of posts: 1000
+Number of comments: 0
+Average number of posts per user: 66.66666666666667
+Average number of comments per user: 0.0
+Average number of comments per post: 0.0
+Test Case: end
+
+Test Case: begin
+Testing case: no users
+Number of users: 0
+Number of posts: 0
+Number of comments: 0
+Average number of posts per user: 0.0
+Average number of comments per user: 0.0
+Average number of comments per post: 0.0
+Test Case: end
+
+Test Suite: end
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
