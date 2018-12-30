@@ -8,6 +8,8 @@ interface ArrayOperations {
                 map(n -> numbers[n]).
                 forEach(System.out::println);
         return IntStream.range(0, numbers.length)
-                .map(n -> numbers[n]).average().orElse(-1);
+                .map(n -> numbers[n])
+                .average()
+                .orElse(-1);
     }
 }
