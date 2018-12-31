@@ -2,11 +2,14 @@ package com.kodilla.stream.portfolio;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -146,14 +149,16 @@ public class BoardTestSuite {
         //When
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
-        List<Integer> days= project.getTaskLists().stream()
+        List<Long> days = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .map(t -> t.getCreated())
-                .map(t -> Period.between(t,LocalDate.now()).getDays())
+                .map(t -> t.getCreated().atStartOfDay())
+                .map(t -> Duration.between(t,LocalDate.now().atStartOfDay()).toDays())
                 .collect(toList());
+
         double averageDays = IntStream.range(0,days.size())
-                .map(d -> days.get(d)).average().orElse(-1);
+                .map(d -> Math.toIntExact(days.get(d)))
+                .average().orElse(-1);
 
         //Then
         Assert.assertEquals(10,averageDays,0.01);
