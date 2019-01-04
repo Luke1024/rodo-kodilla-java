@@ -1,14 +1,14 @@
 package com.kodilla.rps;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
 public interface RpsInterface {
     Scanner sc = new Scanner(System.in);
+
+    Random rand = new Random();
 
 
     void print(String p);
@@ -19,7 +19,7 @@ public interface RpsInterface {
         while(true){
             playerName=sc.nextLine();
             if(playerName.equals(nullString)){
-                System.out.println("What's your name?, use any sign.");
+                System.out.println("What's your name?, use any sign/s.");
             } else {
                 break;
             }
@@ -50,7 +50,7 @@ public interface RpsInterface {
     }
 
     default boolean areYouSure2(){
-        System.out.println("Are you sure you want to renew game? y / n");
+        System.out.println("Are you sure you want to restart the game? y / n");
         return areYouSureBlock();
     }
 
@@ -61,12 +61,12 @@ public interface RpsInterface {
         int rounds;
 
         while(true){
-            System.out.println("How many rounds do you wanna play?");
+            System.out.println("How many rounds do you want to play?");
             String temp = sc.nextLine();
             try {
                 rounds = Integer.parseInt(temp);
                 if(rounds<1 || rounds>10){
-                    System.out.println("Use number between 1 to 10.");
+                    System.out.println("Use number from 1 to 10.");
                 } else {
                     break;
                 }
@@ -81,7 +81,7 @@ public interface RpsInterface {
                         System.out.println("Game hasn't even started yet.");
                     }
                 } else {
-                        System.out.println("Use number beetween 1 or 10 or x to exit.");
+                        System.out.println("Use number from 1 or 10 or x to exit.");
                     }
                 }
             }
@@ -116,7 +116,7 @@ public interface RpsInterface {
                         }
                     }
                 } else {
-                    System.out.println("Use number beetween 1 or 10 or x to exit.");
+                    System.out.println("Use 1-rock, 2-paper, 3-scissors");
                 }
             }
         }
@@ -125,41 +125,43 @@ public interface RpsInterface {
 
     default int[] winMap(int rounds){
 
-        //start here
+        int playMode = rand.nextInt(4);
 
-        for(int i=0; i<0; i++){
-            winLoseMap.add()
+        //1-computer win, 2-tie, 3-player wins
+        int[] winLoseMap = new int[rounds];
+
+        //lower bound of wins
+        int lowerBound = (int) Math.floor(rounds/2.0)+1;
+
+        //computer or player
+        int winNumber = rand.nextInt(rounds-lowerBound)+lowerBound;
+
+        //computer win
+        if(playMode==0 || playMode==1){
+            for(int i=0; i<winNumber; i++){
+                winLoseMap[i] = 1;
+            }
+            Collections.shuffle(Arrays.asList(winLoseMap));
+
+            //generate random tie
+
+            int maxTieNumber
+
+
         }
+
+        //computer lose
+        if(playMode==2){
+
+        }
+
+        //tie
+        if(playMode==3){
+
+        }
+
         return winLoseMap;
     }
 }
 
 
-
-
-                    /*
-                rounds = Integer.parseInt(sc.nextLine());
-                if(rounds<1 || rounds > 10){
-                  System.out.println("Rounds number cannot be lower than 1 or larger than 10");
-                } else {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-                try {
-                    command = sc.nextLine();
-                    if(command.toLowerCase()=="x"){
-                        System.exit(0);
-                    }
-                    if(command.toLowerCase()=="n"){
-                        System.out.println("Game not even started yet.");
-                    }
-                } catch (Exception z){
-                    System.out.println("User number between 1 and 10");
-                }
-            }
-        }
-        return rounds;
-    }
-}
-*/
