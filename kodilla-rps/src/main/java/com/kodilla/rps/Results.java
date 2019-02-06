@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 public class Results {
     int computerScore;
     int playerScore;
-    String playerName;
     List<Result> resultsList = new ArrayList<>();
 
     void addResult(Result result){

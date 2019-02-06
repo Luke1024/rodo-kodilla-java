@@ -64,9 +64,6 @@ public class RpsUserDialogs {
     void yourMoveExtended() {
         System.out.println("Your move... 1-rock, 2-paper, 3-scissors, 4-lizard, 5-spock");
     }
-    void use123Extended(){
-        System.out.println("Use 1-rock, 2-paper, 3-scissors, 4-lizard, 5-spock");
-    }
     //interactions
     String rockScissors(){
         return "Rock crushes scissors.";
