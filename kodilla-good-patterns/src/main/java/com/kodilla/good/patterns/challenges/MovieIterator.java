@@ -7,9 +7,8 @@ public class MovieIterator {
 
         MovieStore movieStore = new MovieStore();
 
-        String moviesInString = movieStore.getMovies().entrySet().stream()
-                .flatMap(n->n.getValue().stream().map(x->x + "  !  ")).collect(Collectors.joining());
-
-        System.out.println(moviesInString.substring(0,moviesInString.length()-3));
+        System.out.println(movieStore.getMovies().entrySet().stream()
+                .flatMap(n->n.getValue().stream())
+                .collect(Collectors.joining("  !  ")));
     }
 }
