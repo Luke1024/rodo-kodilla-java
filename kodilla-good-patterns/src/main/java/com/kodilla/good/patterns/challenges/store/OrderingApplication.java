@@ -6,7 +6,7 @@ public class OrderingApplication {
         Order order = orderRetriever.retrieve();
 
         OrderProcessor orderProcessor = new OrderProcessor(
-                new MailService(), new Warehouse(), new StoreRepository());
+                new MailServiceDE(), new WarehouseCN(), new StoreRepositoryUK());
         orderProcessor.process(order);
     }
 }
