@@ -215,7 +215,7 @@ public class ForumStatisticsTestSuite {
         ForumStatistics forumStat = new ForumStatistics(statisticsMock);
         forumStat.calculateAdvStatistics();
 
-        System.out.println("Testing case: no users");
+        System.out.println("Testing case: no customers");
 
         Assert.assertEquals(usersCount, forumStat.getUsersCount());
         Assert.assertEquals(postsCount, forumStat.getPostsCount());
@@ -248,7 +248,7 @@ public class ForumStatisticsTestSuite {
         ForumStatistics forumStat = new ForumStatistics(statisticsMock);
         forumStat.calculateAdvStatistics();
 
-        System.out.println("Testing case: 100 users");
+        System.out.println("Testing case: 100 customers");
 
         Assert.assertEquals(usersCount, forumStat.getUsersCount());
         Assert.assertEquals(postsCount, forumStat.getPostsCount());

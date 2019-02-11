@@ -38,7 +38,7 @@ public class ForumStatistics
     }
 
     public void showStatistics(){
-        System.out.println("Number of users: " + usersCount);
+        System.out.println("Number of customers: " + usersCount);
         System.out.println("Number of posts: " + postsCount);
         System.out.println("Number of comments: " + commentsCount);
         System.out.println("Average number of posts per user: " + postAvgPerUser);

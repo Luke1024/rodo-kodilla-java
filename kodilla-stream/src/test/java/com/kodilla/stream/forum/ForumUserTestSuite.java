@@ -7,7 +7,7 @@ public class ForumUserTestSuite {
     @Test
     public void testGetLocationsOfFriendsOfFriends() {
         //Given
-        //Create users
+        //Create customers
         ForumUser user1 = new ForumUser("alan01", "Alan Kosovsky", "Washington");
         ForumUser user2 = new ForumUser("ethanreard", "Ethan Reard", "Miami");
         ForumUser user3 = new ForumUser("eRiK", "Erik Hull", "Key West");

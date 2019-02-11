@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 
 public class BoardTestSuite {
     public Board prepareTestData() {
-        //users
+        //customers
         User user1 = new User("developer1", "John Smith");
         User user2 = new User("projectmanager1", "Nina White");
         User user3 = new User("developer2", "Emilia Stephanson");
