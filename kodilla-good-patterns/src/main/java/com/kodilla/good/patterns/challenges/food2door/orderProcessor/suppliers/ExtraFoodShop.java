@@ -1,13 +1,55 @@
 package com.kodilla.good.patterns.challenges.food2door.orderProcessor.suppliers;
 
-import com.kodilla.good.patterns.challenges.food2door.orderProcessor.*;
+import com.kodilla.good.patterns.challenges.food2door.orderProcessor.FoodItem;
+import com.kodilla.good.patterns.challenges.food2door.orderProcessor.InfoDTO;
+import com.kodilla.good.patterns.challenges.food2door.orderProcessor.Order;
+import com.kodilla.good.patterns.challenges.food2door.orderProcessor.ResourcesCatalog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExtraFoodShop implements Supplier {
-    public OrderDTO process(Order order, ResourcesCatalog resourcesCatalog) {
 
+    private List<FoodItem> stock = new ArrayList<>(Arrays.asList(
+            new FoodItem("FattyButter", 4321, 3)));
+
+    public InfoDTO process(Order order, ResourcesCatalog resourcesCatalog) {
+
+        if (!order.getItems().isEmpty()) {
+            if (!checkIfItemsAvailable(order).isEmpty()) {
+                return orderSuccessful(order, resourcesCatalog);
+            } else {
+                String comment = "Requested item/s not available";
+                return new InfoDTO(order.getCustomer(), false, comment);
+            }
+        } else {
+            String comment = "Blank order.";
+            return new InfoDTO(order.getCustomer(), false, comment);
+        }
+    }
+
+    private List<FoodItem>  checkIfItemsAvailable(Order order) {
+        List<FoodItem> itemsOrderedOnStock = new ArrayList<>();
+
+        for (FoodItem foodItem : order.getItems()) {
+            List<FoodItem> ordered = stock.stream()
+                    .filter(item -> item.getItemID() == foodItem.getItemID())
+                    .filter(item -> item.getItemQuantity() >= foodItem.getItemQuantity())
+                    .collect(Collectors.toList());
+
+            ordered.stream().forEach(itemsOrderedOnStock::add);
+        }
+
+        return itemsOrderedOnStock;
+    }
+
+    private InfoDTO orderSuccessful(Order order, ResourcesCatalog resourcesCatalog) {
         String comment = "Order for " + order.getCustomer().getName() + " "
-                + order.getCustomer().getSurname() + " received " + order.getOrderPlacedTime() + " . Order in preparation." + "\n" +
-                "Expected delivery time " + order.getOrderPlacedTime().plusDays(5);
+                + order.getCustomer().getSurname() + " received " + order.getOrderPlacedTime() +
+                " . Order in preparation." + "\n" + "Expected delivery time " +
+                order.getOrderPlacedTime().plusDays(5);
 
         resourcesCatalog.getInformationServiceList().getInformationServices().stream()
                 .forEach(informationService -> informationService.inform(order.getCustomer()));
@@ -15,6 +57,6 @@ public class ExtraFoodShop implements Supplier {
         resourcesCatalog.getDataRepositoryList().getDataRepositories().stream()
                 .forEach(dataRepository -> dataRepository.archiveOrder(order));
 
-        return new OrderDTO(order.getCustomer(), true, comment);
+        return new InfoDTO(order.getCustomer(), true, comment);
     }
 }

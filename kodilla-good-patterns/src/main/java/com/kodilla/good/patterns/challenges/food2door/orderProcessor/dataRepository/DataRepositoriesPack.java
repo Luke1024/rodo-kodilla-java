@@ -2,10 +2,10 @@ package com.kodilla.good.patterns.challenges.food2door.orderProcessor.dataReposi
 
 import java.util.List;
 
-public class DataRepositoryList {
+public class DataRepositoriesPack {
     private List<DataRepository> dataRepositories;
 
-    public DataRepositoryList(List<DataRepository> dataRepositories) {
+    public DataRepositoriesPack(List<DataRepository> dataRepositories) {
         this.dataRepositories = dataRepositories;
     }
 

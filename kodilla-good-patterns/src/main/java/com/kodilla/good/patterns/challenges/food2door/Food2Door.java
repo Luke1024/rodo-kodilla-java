@@ -14,8 +14,8 @@ public class Food2Door {
 
         OrderAllocator orderAllocator = new OrderAllocator();
 
-        List<OrderDTO> orderInfo = orderAllocator.allocateAndProcessOrder(order, resourcesCatalog);
+        List<InfoDTO> orderInfo = orderAllocator.allocateAndProcessOrder(order, resourcesCatalog);
 
-        orderInfo.stream().map(orderDTO -> orderDTO.getComment()).forEach(System.out::println);
+        orderInfo.stream().map(InfoDTO::getComment).forEach(System.out::println);
     }
 }

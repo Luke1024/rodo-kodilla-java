@@ -2,10 +2,10 @@ package com.kodilla.good.patterns.challenges.food2door.orderProcessor.informatio
 
 import java.util.List;
 
-public class InformationServiceList {
+public class InformationServicesPack {
     private List<InformationService> informationServices;
 
-    public InformationServiceList(List<InformationService> informationServices) {
+    public InformationServicesPack(List<InformationService> informationServices) {
         this.informationServices = informationServices;
     }
 
