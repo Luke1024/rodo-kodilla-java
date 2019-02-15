@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.kodilla.stream.forum.ForumUserTestSuite" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-02-15T11:33:46" hostname="base_pc" time="0.006">
+  <properties/>
+  <testcase name="testGetLocationsOfFriendsOfFriends" classname="com.kodilla.stream.forum.ForumUserTestSuite" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

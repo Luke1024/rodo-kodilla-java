@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" tests="7" skipped="0" failures="0" errors="0" timestamp="2018-12-19T13:48:29" hostname="base_pc" time="0.1">
+<testsuite name="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-02-15T11:33:47" hostname="base_pc" time="0.235">
   <properties/>
-  <testcase name="testCaseNoPost" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.091"/>
+  <testcase name="testCaseNoPost" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.228"/>
   <testcase name="testCaseMoreCommentsThanPosts" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
   <testcase name="testCase1000Post" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
   <testcase name="testCase100Users" classname="com.kodilla.testing.forum.statistics.ForumStatisticsTestSuite" time="0.001"/>
@@ -11,7 +11,7 @@
   <system-out><![CDATA[Test Suite: begin
 Test Case: begin
 Testing case: no posts
-Number of users: 42
+Number of customers: 42
 Number of posts: 0
 Number of comments: 0
 Average number of posts per user: 0.0
@@ -21,7 +21,7 @@ Test Case: end
 
 Test Case: begin
 Testing case: more comments than posts
-Number of users: 456
+Number of customers: 456
 Number of posts: 5465
 Number of comments: 12304
 Average number of posts per user: 11.984649122807017
@@ -31,7 +31,7 @@ Test Case: end
 
 Test Case: begin
 Testing case: 1000 posts
-Number of users: 15
+Number of customers: 15
 Number of posts: 1000
 Number of comments: 2300
 Average number of posts per user: 66.66666666666667
@@ -40,8 +40,8 @@ Average number of comments per post: 2.3
 Test Case: end
 
 Test Case: begin
-Testing case: 100 users
-Number of users: 100
+Testing case: 100 customers
+Number of customers: 100
 Number of posts: 525
 Number of comments: 640
 Average number of posts per user: 5.25
@@ -51,7 +51,7 @@ Test Case: end
 
 Test Case: begin
 Testing case: more posts than comments
-Number of users: 15
+Number of customers: 15
 Number of posts: 1000
 Number of comments: 650
 Average number of posts per user: 66.66666666666667
@@ -61,7 +61,7 @@ Test Case: end
 
 Test Case: begin
 Testing case: no comments
-Number of users: 15
+Number of customers: 15
 Number of posts: 1000
 Number of comments: 0
 Average number of posts per user: 66.66666666666667
@@ -70,8 +70,8 @@ Average number of comments per post: 0.0
 Test Case: end
 
 Test Case: begin
-Testing case: no users
-Number of users: 0
+Testing case: no customers
+Number of customers: 0
 Number of posts: 0
 Number of comments: 0
 Average number of posts per user: 0.0
