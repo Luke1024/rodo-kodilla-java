@@ -1,36 +1,30 @@
 package com.kodilla.good.patterns.challenges.flights;
 
-import com.kodilla.good.patterns.challenges.flights.flightSearchingEngine.City;
-import com.kodilla.good.patterns.challenges.flights.flightSearchingEngine.FlightSearch;
-import com.kodilla.good.patterns.challenges.flights.flightSearchingEngine.FlightsDatabase;
-import com.kodilla.good.patterns.challenges.flights.flightSearchingEngine.SearchDTO;
+import com.kodilla.good.patterns.challenges.flights.searchengine.City;
+import com.kodilla.good.patterns.challenges.flights.searchengine.FlightsDatabase;
+import com.kodilla.good.patterns.challenges.flights.searchengine.SearchEngine;
 
 public class Flights {
 
     public static void main(String[] args) {
-
         FlightsDatabase flightsDatabase = new FlightsDatabase();
 
-        FlightSearch flightSearch = new FlightSearch(flightsDatabase);
+        SearchEngine searchEngine = new SearchEngine();
 
         // 1)
         System.out.println(
-                flightSearch.searchFlight(new SearchDTO(City.WARSAW, City.NONE))
-        );
+                searchEngine.citiesAvailableFromSpecifiedCity(flightsDatabase, City.WARSAW));
 
         // 2)
         System.out.println(
-                flightSearch.searchFlight(new SearchDTO(City.NONE, City.LODZ))
-        );
+                searchEngine.citiesWithFlightsToSpecifiedCity(flightsDatabase, City.LODZ));
 
         // 3)
         System.out.println(
-                flightSearch.searchFlight(new SearchDTO(City.WARSAW, City.POZNAN))
-        );
+                searchEngine.fromTo(flightsDatabase, City.WARSAW, City.POZNAN));
 
         // 4) Control case
         System.out.println(
-                flightSearch.searchFlight(new SearchDTO(City.WROCLAW, City.KATOWICE))
-        );
+                searchEngine.fromTo(flightsDatabase, City.WROCLAW, City.KATOWICE));
     }
 }
