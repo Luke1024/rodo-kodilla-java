@@ -7,24 +7,25 @@ import com.kodilla.good.patterns.challenges.flights.searchengine.SearchEngine;
 public class Flights {
 
     public static void main(String[] args) {
+
         FlightsDatabase flightsDatabase = new FlightsDatabase();
 
-        SearchEngine searchEngine = new SearchEngine();
+        SearchEngine searchEngine = new SearchEngine(flightsDatabase);
 
         // 1)
         System.out.println(
-                searchEngine.citiesAvailableFromSpecifiedCity(flightsDatabase, City.WARSAW));
+                        searchEngine.citiesAvailableFromDepartureCity(City.WARSAW));
 
         // 2)
         System.out.println(
-                searchEngine.citiesWithFlightsToSpecifiedCity(flightsDatabase, City.LODZ));
+                        searchEngine.citiesAvailableToArrivalCity(City.LODZ));
 
         // 3)
         System.out.println(
-                searchEngine.fromTo(flightsDatabase, City.WARSAW, City.POZNAN));
+                searchEngine.fromThroughTo(City.WARSAW, City.LODZ, City.POZNAN));
 
         // 4) Control case
         System.out.println(
-                searchEngine.fromTo(flightsDatabase, City.WROCLAW, City.KATOWICE));
+                searchEngine.fromThroughTo(City.WROCLAW, City.WARSAW, City.POZNAN));
     }
 }

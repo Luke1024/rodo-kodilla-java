@@ -1,12 +1,17 @@
 package com.kodilla.good.patterns.challenges.flights.searchengine;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SearchEngine {
 
-    public String citiesAvailableFromSpecifiedCity(FlightsDatabase flightsDatabase , City city){
+    private FlightsDatabase flightsDatabase;
+
+    public SearchEngine(FlightsDatabase flightsDatabase) {
+        this.flightsDatabase = flightsDatabase;
+    }
+
+    public String citiesAvailableFromDepartureCity(City city){
         return "Flights from " + city.toString() + " available to: \n" +
                 flightsDatabase.getDatabase().entrySet().stream()
                         .filter(f -> f.getKey().getDeparture().equals(city))
@@ -14,36 +19,31 @@ public class SearchEngine {
                         .collect(Collectors.joining("\n")) + "\n";
     }
 
-    public String citiesWithFlightsToSpecifiedCity(FlightsDatabase flightsDatabase , City city){
-        return "Flights to " + city.toString() + " available from: \n"
-                + flightsDatabase.getDatabase().entrySet().stream()
-                .filter(f -> f.getKey().getArrival().equals(city))
-                .map(f -> f.getKey().getDeparture().toString())
-                .collect(Collectors.joining("\n")) + "\n";
+    public String citiesAvailableToArrivalCity(City city){
+        return "Flights to " + city.toString() + " available from: \n" +
+                flightsDatabase.getDatabase().entrySet().stream()
+                        .filter(f -> f.getKey().getArrival().equals(city))
+                        .map(f -> f.getKey().getDeparture().toString())
+                        .collect(Collectors.joining("\n")) + "\n";
     }
 
-    public String fromTo(FlightsDatabase flightsDatabase, City cityFrom, City cityTo){
+    public String fromThroughTo(City cityFrom, City cityThrough, City cityTo) {
 
-         Map<Flight, FlightData> directFlights =
-                 flightsDatabase.getDatabase().entrySet().stream()
-                .filter(f -> f.getKey().getDeparture().equals(cityFrom) && f.getKey().getArrival().equals(cityTo))
-                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        List<City> availableCitiesThrough =
+                flightsDatabase.getDatabase().entrySet().stream()
+                        .filter(f -> (f.getKey().getDeparture().equals(cityThrough) || f.getKey().getArrival().equals(cityThrough)))
+                        .filter(f -> f.getKey().getDeparture().equals(cityFrom) || f.getKey().getDeparture().equals(cityTo))
+                        .map(c -> c.getKey().getDeparture()).collect(Collectors.toList());
 
-         if(directFlights.isEmpty()){
+        if(availableCitiesThrough.isEmpty()){
 
-             List<City> citiesBetween = flightsDatabase.getDatabase().entrySet().stream()
-                             .filter(f -> f.getKey().getDeparture().equals(cityFrom))
-                     .map(f -> f.getKey().getArrival()).collect(Collectors.toList());
+            return "Flights from " + cityFrom.toString() + " to " + cityTo.toString()
+                    + " through " + cityThrough.toString() + " are not available." + "\n";
 
-             return "Flights from " + cityFrom.toString() + " to " + cityTo.toString()
-                     + " are available with change: \n"
-                     + flightsDatabase.getDatabase().entrySet().stream()
-                     .filter(f -> f.getKey().getArrival().equals(cityTo))
-                     .filter(f -> citiesBetween.contains(f.getKey().getDeparture()))
-                     .map(f -> cityFrom.toString() + " -> " + f.getKey().getDeparture().toString()
-                             + " -> " + f.getKey().getArrival().toString()+"\n").collect(Collectors.joining());
-         } else {
-             return "Flights from " + cityFrom.toString() + " to " + cityTo.toString() + " are available.\n";
-         }
+        } else {
+
+            return "Flights from " + cityFrom.toString() + " to " + cityTo.toString()
+                    + " through " + cityThrough.toString() + " are available. " + "\n";
+        }
     }
 }
