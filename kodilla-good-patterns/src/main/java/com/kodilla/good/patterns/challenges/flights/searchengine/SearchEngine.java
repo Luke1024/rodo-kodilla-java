@@ -1,6 +1,6 @@
 package com.kodilla.good.patterns.challenges.flights.searchengine;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SearchEngine {
@@ -11,39 +11,83 @@ public class SearchEngine {
         this.flightsDatabase = flightsDatabase;
     }
 
-    public String citiesAvailableFromDepartureCity(City city){
-        return "Flights from " + city.toString() + " available to: \n" +
-                flightsDatabase.getDatabase().entrySet().stream()
-                        .filter(f -> f.getKey().getDeparture().equals(city))
-                        .map(f -> f.getKey().getArrival().toString())
-                        .collect(Collectors.joining("\n")) + "\n";
+    public ConnectionDTO citiesAvailableFromDepartureCity(City city){
+
+        Map<Flight, FlightData> availableFlights = flightsDatabase.getDatabase().entrySet().stream()
+                .filter(f->f.getKey().getDeparture().equals(city))
+                .collect(Collectors.toMap(f -> f.getKey(), f -> f.getValue()));
+
+        return getLastFlights(new LastFlightsDTO(Mode.FROM, new ArrayList<City>(Arrays.asList(city)), availableFlights));
     }
 
-    public String citiesAvailableToArrivalCity(City city){
-        return "Flights to " + city.toString() + " available from: \n" +
-                flightsDatabase.getDatabase().entrySet().stream()
-                        .filter(f -> f.getKey().getArrival().equals(city))
-                        .map(f -> f.getKey().getDeparture().toString())
-                        .collect(Collectors.joining("\n")) + "\n";
+    public ConnectionDTO citiesAvailableToArrivalCity(City city){
+
+        Map<Flight, FlightData> availableFlights = flightsDatabase.getDatabase().entrySet().stream()
+                .filter(f->f.getKey().getArrival().equals(city))
+                .collect(Collectors.toMap(f -> f.getKey(), f->f.getValue()));
+
+        return getLastFlights(new LastFlightsDTO(Mode.TO, new ArrayList<City>(Arrays.asList(city)), availableFlights));
     }
 
-    public String fromThroughTo(City cityFrom, City cityThrough, City cityTo) {
+    public ConnectionDTO fromTo(City cityFrom, City cityTo) {
 
-        List<City> availableCitiesThrough =
+
+        Map<Flight, FlightData> directFlights =
                 flightsDatabase.getDatabase().entrySet().stream()
-                        .filter(f -> (f.getKey().getDeparture().equals(cityThrough) || f.getKey().getArrival().equals(cityThrough)))
-                        .filter(f -> f.getKey().getDeparture().equals(cityFrom) || f.getKey().getDeparture().equals(cityTo))
-                        .map(c -> c.getKey().getDeparture()).collect(Collectors.toList());
+                        .filter(f -> f.getKey().getDeparture().equals(cityFrom) && f.getKey().getArrival().equals(cityTo))
+                        .collect(Collectors.toMap(f -> f.getKey(), f->f.getValue()));
 
-        if(availableCitiesThrough.isEmpty()){
-
-            return "Flights from " + cityFrom.toString() + " to " + cityTo.toString()
-                    + " through " + cityThrough.toString() + " are not available." + "\n";
-
+        if (directFlights.isEmpty()) {
+            return routeSearch(cityFrom, cityTo);
         } else {
-
-            return "Flights from " + cityFrom.toString() + " to " + cityTo.toString()
-                    + " through " + cityThrough.toString() + " are available. " + "\n";
+            return getLastFlights(new LastFlightsDTO(Mode.FROM_TO, new ArrayList<>(Arrays.asList(cityFrom, cityTo)), directFlights));
         }
+    }
+
+    private ConnectionDTO getLastFlights(LastFlightsDTO lastFlightsDTO) {
+
+        List<Connection> tempConnectionList = new ArrayList<>();
+
+        for (Map.Entry<Flight, FlightData> availableFlight : lastFlightsDTO.getAvailableFlights().entrySet()) {
+
+            LinkedHashMap<Flight, FlightData> tempFlights = new LinkedHashMap<>();
+
+            tempFlights.put(availableFlight.getKey(), availableFlight.getValue());
+            Connection connection = new Connection(tempFlights);
+            tempConnectionList.add(connection);
+        }
+        return new ConnectionDTO(lastFlightsDTO.getMode(), lastFlightsDTO.getCityList(), tempConnectionList);
+    }
+
+    public ConnectionDTO routeSearch(City cityFrom, City cityTo) {
+
+        Map<Flight, FlightData> endFlights = flightsDatabase.getDatabase().entrySet().stream()
+                .filter(f -> f.getKey().getArrival().equals(cityTo))
+                .collect(Collectors.toMap(f-> f.getKey(), f->f.getValue()));
+
+        List<Connection> tempConnectionList = new ArrayList<>();
+
+        for(Map.Entry<Flight, FlightData> endFlight : endFlights.entrySet()) {
+            for (Map.Entry<Flight, FlightData> entry : flightsDatabase.getDatabase().entrySet()) {
+
+                Map.Entry<Flight, FlightData> startFlight = null;
+
+                if (entry.getKey().getArrival().equals(endFlight.getKey().getDeparture())
+                && entry.getKey().getDeparture().equals(cityFrom)) {
+
+                    startFlight = entry;
+                }
+
+                if (startFlight != null) {
+                    LinkedHashMap<Flight, FlightData> tempFlight = new LinkedHashMap<>();
+                    tempFlight.put(startFlight.getKey(), startFlight.getValue());
+                    tempFlight.put(endFlight.getKey(), endFlight.getValue());
+
+                    Connection connection = new Connection(tempFlight);
+                    tempConnectionList.add(connection);
+                }
+            }
+        }
+        return new ConnectionDTO(Mode.FROM_TO, new ArrayList<>(Arrays.asList(cityFrom, cityTo)), tempConnectionList);
     }
 }

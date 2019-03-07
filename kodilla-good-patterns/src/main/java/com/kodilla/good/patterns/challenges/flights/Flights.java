@@ -1,5 +1,7 @@
 package com.kodilla.good.patterns.challenges.flights;
 
+
+import com.kodilla.good.patterns.challenges.flights.printer.Printer;
 import com.kodilla.good.patterns.challenges.flights.searchengine.City;
 import com.kodilla.good.patterns.challenges.flights.searchengine.FlightsDatabase;
 import com.kodilla.good.patterns.challenges.flights.searchengine.SearchEngine;
@@ -12,20 +14,21 @@ public class Flights {
 
         SearchEngine searchEngine = new SearchEngine(flightsDatabase);
 
+        Printer printer = new Printer();
+
         // 1)
-        System.out.println(
-                        searchEngine.citiesAvailableFromDepartureCity(City.WARSAW));
+        printer.printFlight(searchEngine.citiesAvailableFromDepartureCity(City.WARSAW));
 
         // 2)
-        System.out.println(
-                        searchEngine.citiesAvailableToArrivalCity(City.LODZ));
+        printer.printFlight(searchEngine.citiesAvailableToArrivalCity(City.LODZ));
 
         // 3)
-        System.out.println(
-                searchEngine.fromThroughTo(City.WARSAW, City.LODZ, City.POZNAN));
+        printer.printFlight(searchEngine.fromTo(City.WARSAW, City.POZNAN));
 
-        // 4) Control case
-        System.out.println(
-                searchEngine.fromThroughTo(City.WROCLAW, City.WARSAW, City.POZNAN));
+        // 4) Control case (direct flight)
+        printer.printFlight(searchEngine.fromTo(City.WROCLAW, City.POZNAN));
+
+        // 5) Control case (no flight)
+        printer.printFlight(searchEngine.fromTo(City.POZNAN, City.KATOWICE));
     }
 }
