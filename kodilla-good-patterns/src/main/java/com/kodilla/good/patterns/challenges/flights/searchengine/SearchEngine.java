@@ -31,7 +31,6 @@ public class SearchEngine {
 
     public ConnectionDTO fromTo(City cityFrom, City cityTo) {
 
-
         Map<Flight, FlightData> directFlights =
                 flightsDatabase.getDatabase().entrySet().stream()
                         .filter(f -> f.getKey().getDeparture().equals(cityFrom) && f.getKey().getArrival().equals(cityTo))
