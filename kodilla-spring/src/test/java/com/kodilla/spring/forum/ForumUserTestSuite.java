@@ -1,4 +1,4 @@
-package com.kodilla.spring.com.kodilla.spring.forum;
+package com.kodilla.spring.forum;
 
 import com.kodilla.spring.forum.ForumUser;
 import com.kodilla.spring.shape.Shape;
