@@ -1,6 +1,7 @@
 package com.kodilla.hibernate.tasklist.dao;
 
 import com.kodilla.hibernate.tasklist.TaskList;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,13 @@ public class TaskListDaoTestSuite {
     public void testFindByListName(){
         //Given
         TaskList taskList = new TaskList(LIST_NAME,"Too awesome to describe.");
-
-        //When
         taskListDao.save(taskList);
 
-        //Then
+        //When
         List<TaskList> readTaskList = taskListDao.findByListName(LIST_NAME);
+
+        //Then
+        Assert.assertEquals(1, readTaskList.size());
 
         //CleanUp
         int id = taskList.getId();
