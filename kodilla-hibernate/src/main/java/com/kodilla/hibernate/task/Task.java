@@ -12,7 +12,7 @@ public final class Task {
     private Date created;
     private int duration;
 
-    public Task(){
+    public Task() {
     }
 
     public Task(String description, int duration) {

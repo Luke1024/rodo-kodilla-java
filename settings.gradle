@@ -8,5 +8,6 @@ include 'kodilla-spring-intro'
 include 'kodilla-spring'
 include 'kodilla-paterns'
 include 'kodilla-jdbc'
-findProject(':kodilla-jdbc')?.name = 'kodilla-course'
+include 'kodilla-hibernate'
+include 'kodilla-sudoku'
 
