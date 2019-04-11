@@ -29,11 +29,17 @@ public class InvoiceDaoTestSuite {
         Item item = new Item(1,product, new BigDecimal(5), 2, new BigDecimal(3));
         Item item2 = new Item(2, product2, new BigDecimal(10),2, new BigDecimal(6));
         Item item3 = new Item(3, product2, new BigDecimal(20),4,new BigDecimal(12));
+        Invoice invoice = new Invoice(0,"1");
+
+        product.setItemList(new ArrayList<>(Arrays.asList(item)));
+        product2.setItemList(new ArrayList<>(Arrays.asList(item2, item3)));
         item.setProduct(product);
         item2.setProduct(product2);
         item3.setProduct(product2);
-        Invoice invoice = new Invoice(1,"1");
-        invoice.setItems(new ArrayList<>(Arrays.asList(item, item2, item3)));
+        item.setInvoice(invoice);
+        item2.setInvoice(invoice);
+        item3.setInvoice(invoice);
+        invoice.setItems(new ArrayList<>(Arrays.asList(item,item2,item3)));
 
         //When
         invoiceDao.save(invoice);

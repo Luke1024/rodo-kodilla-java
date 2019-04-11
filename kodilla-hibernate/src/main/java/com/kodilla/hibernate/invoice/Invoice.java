@@ -11,6 +11,8 @@ public class Invoice {
     private String number;
     private List<Item> items;
 
+    public Invoice(){}
+
     public Invoice(int id, String number) {
         this.id = id;
         this.number = number;
@@ -45,8 +47,4 @@ public class Invoice {
     public void setNumber(String number) {
         this.number = number;
     }
-
-
-
-
 }
