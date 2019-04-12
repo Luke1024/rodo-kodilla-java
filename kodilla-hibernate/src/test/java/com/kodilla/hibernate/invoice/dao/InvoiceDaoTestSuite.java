@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class InvoiceDaoTestSuite {
 
     @Autowired
@@ -65,14 +67,5 @@ public class InvoiceDaoTestSuite {
         Assert.assertTrue(null != item1_id);
         Assert.assertTrue(null != item2_id);
         Assert.assertTrue(null != item3_id);
-
-
-        //CleanUp
-        invoiceDao.deleteById(invoice_id);
-        productDao.deleteById(product1_id);
-        productDao.deleteById(product2_id);
-        itemDao.deleteById(item1_id);
-        itemDao.deleteById(item2_id);
-        itemDao.deleteById(item3_id);
     }
 }
