@@ -20,32 +20,59 @@ public class InvoiceDaoTestSuite {
 
     @Autowired
     private InvoiceDao invoiceDao;
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private ItemDao itemDao;
 
     @Test
     public void testInvoiceDaoSave() {
         //Given
-        Product product = new Product(1, "Good Product");
-        Product product2 = new Product(2, "Better Product");
-        Item item = new Item(1,product, new BigDecimal(5), 2, new BigDecimal(3));
-        Item item2 = new Item(2, product2, new BigDecimal(10),2, new BigDecimal(6));
-        Item item3 = new Item(3, product2, new BigDecimal(20),4,new BigDecimal(12));
-        Invoice invoice = new Invoice(0,"1");
+        Product product1 = new Product("Good Product");
+        Product product2 = new Product("Better Product");
+        Item item1 = new Item(product1, new BigDecimal(5), 2, new BigDecimal(3));
+        Item item2 = new Item(product2, new BigDecimal(10),2, new BigDecimal(6));
+        Item item3 = new Item(product2, new BigDecimal(20),4,new BigDecimal(12));
+        Invoice invoice = new Invoice("1");
 
-        product.setItemList(new ArrayList<>(Arrays.asList(item)));
+        product1.setItemList(new ArrayList<>(Arrays.asList(item1)));
         product2.setItemList(new ArrayList<>(Arrays.asList(item2, item3)));
-        item.setProduct(product);
-        item2.setProduct(product2);
-        item3.setProduct(product2);
-        item.setInvoice(invoice);
-        item2.setInvoice(invoice);
-        item3.setInvoice(invoice);
-        invoice.setItems(new ArrayList<>(Arrays.asList(item,item2,item3)));
+        invoice.setItems(new ArrayList<>(Arrays.asList(item1,item2,item3)));
+
 
         //When
         invoiceDao.save(invoice);
-        int id = invoice.getId();
+        productDao.save(product1);
+        productDao.save(product2);
+        itemDao.save(item1);
+        itemDao.save(item2);
+        itemDao.save(item3);
+
+        Integer invoice_id = invoice.getId();
+        Integer product1_id = product1.getId();
+        Integer product2_id = product2.getId();
+        Integer item1_id = item1.getId();
+        Integer item2_id = item2.getId();
+        Integer item3_id = item3.getId();
+
+        System.out.println((invoice.getId()));
+        System.out.println(invoice_id);
 
         //Then
-        Assert.assertEquals(1,id);
+        Assert.assertTrue(null != invoice_id);
+        Assert.assertTrue(null != product1_id);
+        Assert.assertTrue(null != product2_id);
+        Assert.assertTrue(null != item1_id);
+        Assert.assertTrue(null != item2_id);
+        Assert.assertTrue(null != item3_id);
+
+
+        //CleanUp
+        invoiceDao.deleteById(invoice_id);
+        productDao.deleteById(product1_id);
+        productDao.deleteById(product2_id);
+        itemDao.deleteById(item1_id);
+        itemDao.deleteById(item2_id);
+        itemDao.deleteById(item3_id);
     }
 }

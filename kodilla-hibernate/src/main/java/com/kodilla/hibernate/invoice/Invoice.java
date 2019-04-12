@@ -13,8 +13,7 @@ public class Invoice {
 
     public Invoice(){}
 
-    public Invoice(int id, String number) {
-        this.id = id;
+    public Invoice(String number) {
         this.number = number;
     }
 
@@ -26,11 +25,14 @@ public class Invoice {
         return id;
     }
 
+    @Column(name = "NUMBER")
+    public String getNumber() {
+        return number;
+    }
+
     @OneToMany(
             targetEntity = Item.class,
-            mappedBy = "invoice",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = "invoice"
     )
     public List<Item> getItems() {
         return items;

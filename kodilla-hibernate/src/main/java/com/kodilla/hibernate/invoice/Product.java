@@ -11,8 +11,9 @@ public class Product {
     private String name;
     private List<Item> itemList;
 
-    public Product(int id, String name) {
-        this.id = id;
+    public Product(){}
+
+    public Product(String name) {
         this.name = name;
     }
 
@@ -35,9 +36,7 @@ public class Product {
 
     @OneToMany(
             targetEntity = Item.class,
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            mappedBy = "product"
     )
     public List<Item> getItemList() {
         return itemList;
