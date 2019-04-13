@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-/*
 @NamedQueries({
         @NamedQuery(
                 name = "Task.retrieveLongTasks",
@@ -23,11 +22,10 @@ import java.util.Date;
                 "WHERE DATEDIFF(DATE_ADD(CREATED, INTERVAL DURATION DAY)), NOW()) >5",
         resultClass = Task.class
 )
-*/
 
 @Entity
 @Table(name = "TASKS")
-public final class Task {
+public class Task {
     private int id;
     private String description;
     private Date created;

@@ -64,9 +64,9 @@ public class TaskListDaoTestSuite {
         Assert.assertNotEquals(0, id);
 
         //CleanUp
-        //taskListDao.deleteById(id);
+        taskListDao.deleteById(id);
     }
-/*
+
     @Test
     public void testNamedQueries() {
         //Given
@@ -114,5 +114,4 @@ public class TaskListDaoTestSuite {
             taskListDao.deleteById(id);
         }
     }
-    */
 }
