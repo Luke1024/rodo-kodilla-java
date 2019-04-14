@@ -2,6 +2,7 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.task.Task;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+    @Autowired
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany(){
@@ -52,12 +57,77 @@ public class CompanyDaoTestSuite {
         Assert.assertNotEquals(0, greyMatterId);
 
         //CleanUp
-        //try {
-        //    companyDao.deleteById(softwareMachineId);
-        //    companyDao.deleteById(dataMaestersId);
-        //    companyDao.deleteById(greyMatterId);
-        //} catch (Exception e) {
-        //    //do nothing
-        //}
+        try {
+            companyDao.deleteById(softwareMachineId);
+            companyDao.deleteById(dataMaestersId);
+            companyDao.deleteById(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    @Test
+    public void testFindEmployeesByLastname(){
+        //Given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+
+        int johnSmithId = johnSmith.getId();
+        int stephanieClarcksonId = stephanieClarckson.getId();
+        int lindaKovalskyId = lindaKovalsky.getId();
+
+        //When
+        List<Employee> employees1 = employeeDao.findEmployeesByLastname("Smith");
+        List<Employee> employees2 = employeeDao.findEmployeesByLastname("Clarckson");
+        List<Employee> employees3 = employeeDao.findEmployeesByLastname("Kovalsky");
+
+        //Then
+        try {
+            Assert.assertEquals(employees1.get(0).getFirstname(), johnSmith.getFirstname());
+            Assert.assertEquals(employees2.get(0).getFirstname(), stephanieClarckson.getFirstname());
+            Assert.assertEquals(employees3.get(0).getFirstname(), lindaKovalsky.getFirstname());
+        } finally {
+            //CleanUp
+            employeeDao.deleteById(johnSmithId);
+            employeeDao.deleteById(stephanieClarcksonId);
+            employeeDao.deleteById(lindaKovalskyId);
+        }
+    }
+
+    @Test
+    public void testFindACompanyWithTheBeginningOfTheName(){
+        //Given
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Grey Matter");
+
+        companyDao.save(softwareMachine);
+        int softwareMachineId = softwareMachine.getId();
+        companyDao.save(dataMaesters);
+        int dataMaestersId = dataMaesters.getId();
+        companyDao.save(greyMatter);
+        int greyMatterId = greyMatter.getId();
+
+        //When
+        List<Company> sofSearch = companyDao.findACompanyWithTheBeginningOfTheName("Sof" + "%");
+        List<Company> datSearch = companyDao.findACompanyWithTheBeginningOfTheName("Dat" + "%");
+        List<Company> greSearch = companyDao.findACompanyWithTheBeginningOfTheName("Gre" + "%");
+
+        //Then
+        try {
+            Assert.assertEquals(sofSearch.get(0).getName(), "Software Machine");
+            Assert.assertEquals(datSearch.get(0).getName(), "Data Maesters");
+            Assert.assertEquals(greSearch.get(0).getName(), "Grey Matter");
+        } finally {
+            //CleanUp
+            companyDao.deleteById(softwareMachineId);
+            companyDao.deleteById(dataMaestersId);
+            companyDao.deleteById(greyMatterId);
+        }
     }
 }
