@@ -1,4 +1,4 @@
-package com.kodilla.patterns2.adapter.bookclasifier;
+package com.kodilla.patterns2.adapter.bookclasifier.librarya;
 
 import java.util.Set;
 
