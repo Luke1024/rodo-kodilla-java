@@ -8,9 +8,9 @@ public class Mentor implements Observer{
         this.mentorName = mentorName;
     }
     @Override
-    public void update(Task task) {
-        System.out.println(mentorName + "New task by " + task.getStudentName() + "\n" +
-                " tasks queue size: " + task.getTaskContent().size());
+    public void update(Student student) {
+        System.out.println("New task by " + student.getStudentName() + "\n" +
+                " tasks queue size: " + student.getTasksQueue().size());
         updateCount++;
     }
     public int getUpdateCount() {

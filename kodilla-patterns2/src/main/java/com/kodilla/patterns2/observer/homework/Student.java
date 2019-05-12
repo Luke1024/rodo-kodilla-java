@@ -1,10 +1,40 @@
 package com.kodilla.patterns2.observer.homework;
 
-public class Student {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Student implements Observable {
+    private final List<Observer> observers;
+    private final List<Task> tasksQueue;
     private final String studentName;
 
     public Student(String studentName) {
+        observers = new ArrayList<>();
+        tasksQueue = new ArrayList<>();
         this.studentName = studentName;
+    }
+
+    public void addTask(Task task) {
+        tasksQueue.add(task);
+        notifyObservers();
+    }
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+    @Override
+    public void notifyObservers() {
+        for(Observer observer : observers) {
+            observer.update(this);
+        }
+    }
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    public List<Task> getTasksQueue() {
+        return tasksQueue;
     }
 
     public String getStudentName() {
