@@ -15,52 +15,51 @@ public class Facade {
     @Autowired
     CompanyDao companyDao;
 
-    public <T> ProcessDTO process(List<T> objects, Operator operator) {
+    public <T> ProcessDTO sendRequest(List<T> objects, Request request) {
         List<T> searchOutput = new ArrayList<>();
 
         for (T object : objects) {
             if (object instanceof Employee) {
-                processingEmployee((Employee) object, operator);
+                processingEmployee((Employee) object, request);
                 System.out.println("processingEmployee");
             }
             if (object instanceof Company) {
-                processingCompany((Company) object, operator);
+                processingCompany((Company) object, request);
             }
             if (object instanceof String) {
-                searchOutput = searchDatabase((String) object, operator);
+                searchOutput = searchDatabase((String) object, request);
             }
         }
         return dataOutput(searchOutput);
     }
 
-
-    private void processingEmployee(Employee employee, Operator operator) {
-        if (operator == Operator.ADD) {
+    private void processingEmployee(Employee employee, Request request) {
+        if (request == Request.ADD) {
             saveEmployee(employee);
             System.out.println("Adding employee");
         }
-        if (operator == Operator.DELETE) {
+        if (request == Request.DELETE) {
             deleteEmployee(employee);
         }
     }
 
-    private void processingCompany(Company company, Operator operator) {
-        if (operator == Operator.ADD) {
+    private void processingCompany(Company company, Request request) {
+        if (request == Request.ADD) {
             saveCompany(company);
         }
-        if (operator == Operator.DELETE) {
+        if (request == Request.DELETE) {
             deleteCompany(company);
         }
     }
 
-    private <T> List<T> searchDatabase(String string, Operator operator) {
+    private <T> List<T> searchDatabase(String string, Request request) {
         List<T> entryList = new ArrayList<>();
 
-        if (operator == Operator.FIND_EMPLOYEE) {
+        if (request == Request.FIND_EMPLOYEE) {
             List<Employee> employeeList = findEmployees(string);
             entryList = (List<T>) employeeList;
         }
-        if (operator == Operator.FIND_COMPANY) {
+        if (request == Request.FIND_COMPANY) {
             List<Company> companyList = findCompanies(string);
             entryList = (List<T>) companyList;
         }

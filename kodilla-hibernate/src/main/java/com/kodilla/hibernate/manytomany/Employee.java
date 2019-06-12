@@ -9,10 +9,12 @@ import java.util.List;
         name = "Employee.findEmployeesByLastname",
         query = "FROM Employee WHERE lastname =:LASTNAME"
 )
+/*
 @NamedQuery(
         name = "Employee.findEmployeesWithPartOfLastName",
         query = "FROM Employee LIKE partOfLastName =:%PARTOFLASTNAME%"
 )
+*/
 
 @Entity
 @Table(name = "EMPLOYEES")
