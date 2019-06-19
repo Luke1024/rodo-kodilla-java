@@ -3,16 +3,11 @@ package com.kodilla.hibernate.manytomany.facade;
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 
 import static java.util.Arrays.asList;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class FacadeTestSuite {
     private Facade facade;
     @Test
@@ -22,11 +17,11 @@ public class FacadeTestSuite {
         Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
         Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
 
-        facade.sendRequest(asList(johnSmith, stephanieClarckson, lindaKovalsky), Request.ADD);
+        facade.process(asList(johnSmith, stephanieClarckson, lindaKovalsky), Operator.ADD);
         //When
-        ProcessDTO processDTO1 = facade.sendRequest(asList("Smith"), Request.FIND_EMPLOYEE);
-        ProcessDTO processDTO2 = facade.sendRequest(asList("Clarckson"), Request.FIND_EMPLOYEE);
-        ProcessDTO processDTO3 = facade.sendRequest(asList("Kovalsky"), Request.FIND_EMPLOYEE);
+        ProcessDTO processDTO1 = facade.process(asList("Smith"),Operator.FIND_EMPLOYEE);
+        ProcessDTO processDTO2 = facade.process(asList("Clarckson"), Operator.FIND_EMPLOYEE);
+        ProcessDTO processDTO3 = facade.process(asList("Kovalsky"), Operator.FIND_EMPLOYEE);
 
         //Then
         assertEquals(processDTO1.getEmployee().get(0),johnSmith);
@@ -34,7 +29,7 @@ public class FacadeTestSuite {
         assertEquals(processDTO3.getEmployee().get(0),lindaKovalsky);
 
         //CleanUp
-        facade.sendRequest(asList(processDTO1.getCompany(), processDTO2.getCompany(), processDTO3.getCompany()), Request.DELETE);
+        facade.process(asList(processDTO1.getCompany(), processDTO2.getCompany(), processDTO3.getCompany()), Operator.DELETE);
     }
 
     @Test
@@ -44,11 +39,11 @@ public class FacadeTestSuite {
         Company dataMaesters = new Company("Data Maesters");
         Company greyMatter = new Company("Grey Matter");
 
-        facade.sendRequest(asList(softwareMachine, dataMaesters, greyMatter), Request.ADD);
+        facade.process(asList(softwareMachine, dataMaesters, greyMatter), Operator.ADD);
         //When
-        ProcessDTO processDTO1 = facade.sendRequest(asList("Software Machine"), Request.FIND_COMPANY);
-        ProcessDTO processDTO2 = facade.sendRequest(asList("Data Maesters"), Request.FIND_COMPANY);
-        ProcessDTO processDTO3 = facade.sendRequest(asList("Grey Matter"), Request.FIND_COMPANY);
+        ProcessDTO processDTO1 = facade.process(asList("Software Machine"), Operator.FIND_COMPANY);
+        ProcessDTO processDTO2 = facade.process(asList("Data Maesters"), Operator.FIND_COMPANY);
+        ProcessDTO processDTO3 = facade.process(asList("Grey Matter"), Operator.FIND_COMPANY);
 
         //Then
         assertEquals(processDTO1.getCompany().get(0), softwareMachine);
@@ -56,6 +51,6 @@ public class FacadeTestSuite {
         assertEquals(processDTO3.getCompany().get(0), greyMatter);
 
         //CleanUp
-        facade.sendRequest(asList(processDTO1.getCompany(), processDTO2.getCompany(), processDTO3.getCompany()), Request.DELETE);
+        facade.process(asList(processDTO1.getCompany(), processDTO2.getCompany(), processDTO3.getCompany()), Operator.DELETE);
     }
 }

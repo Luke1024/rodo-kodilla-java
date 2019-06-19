@@ -15,51 +15,52 @@ public class Facade {
     @Autowired
     CompanyDao companyDao;
 
-    public <T> ProcessDTO sendRequest(List<T> objects, Request request) {
+    public <T> ProcessDTO process(List<T> objects, Operator operator) {
         List<T> searchOutput = new ArrayList<>();
 
         for (T object : objects) {
             if (object instanceof Employee) {
-                processingEmployee((Employee) object, request);
+                processingEmployee((Employee) object, operator);
                 System.out.println("processingEmployee");
             }
             if (object instanceof Company) {
-                processingCompany((Company) object, request);
+                processingCompany((Company) object, operator);
             }
             if (object instanceof String) {
-                searchOutput = searchDatabase((String) object, request);
+                searchOutput = searchDatabase((String) object, operator);
             }
         }
         return dataOutput(searchOutput);
     }
 
-    private void processingEmployee(Employee employee, Request request) {
-        if (request == Request.ADD) {
+
+    private void processingEmployee(Employee employee, Operator operator) {
+        if (operator == Operator.ADD) {
             saveEmployee(employee);
             System.out.println("Adding employee");
         }
-        if (request == Request.DELETE) {
+        if (operator == Operator.DELETE) {
             deleteEmployee(employee);
         }
     }
 
-    private void processingCompany(Company company, Request request) {
-        if (request == Request.ADD) {
+    private void processingCompany(Company company, Operator operator) {
+        if (operator == Operator.ADD) {
             saveCompany(company);
         }
-        if (request == Request.DELETE) {
+        if (operator == Operator.DELETE) {
             deleteCompany(company);
         }
     }
 
-    private <T> List<T> searchDatabase(String string, Request request) {
+    private <T> List<T> searchDatabase(String string, Operator operator) {
         List<T> entryList = new ArrayList<>();
 
-        if (request == Request.FIND_EMPLOYEE) {
+        if (operator == Operator.FIND_EMPLOYEE) {
             List<Employee> employeeList = findEmployees(string);
             entryList = (List<T>) employeeList;
         }
-        if (request == Request.FIND_COMPANY) {
+        if (operator == Operator.FIND_COMPANY) {
             List<Company> companyList = findCompanies(string);
             entryList = (List<T>) companyList;
         }
