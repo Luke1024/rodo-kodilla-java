@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.kodilla.hibernate.manytomany.facade.FacadeTestSuite" tests="2" skipped="0" failures="2" errors="0" timestamp="2019-06-19T10:56:41" hostname="luke-desktop" time="0.001">
+<testsuite name="com.kodilla.hibernate.manytomany.facade.FacadeTestSuite" tests="2" skipped="0" failures="2" errors="0" timestamp="2019-07-25T15:00:36" hostname="luke-desktop" time="0.001">
   <properties/>
-  <testcase name="testFindEmployeesWithPartOfTheName" classname="com.kodilla.hibernate.manytomany.facade.FacadeTestSuite" time="0.001">
+  <testcase name="testFindEmployeesWithPartOfTheName" classname="com.kodilla.hibernate.manytomany.facade.FacadeTestSuite" time="0.0">
     <failure message="java.lang.NullPointerException" type="java.lang.NullPointerException">java.lang.NullPointerException
 	at com.kodilla.hibernate.manytomany.facade.FacadeTestSuite.testFindEmployeesWithPartOfTheName(FacadeTestSuite.java:20)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
