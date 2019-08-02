@@ -92,7 +92,14 @@ public class CrudAppTestSuite {
                             theForm.findElement(By.xpath(".//button[contains(@class, \"card-creation\")]"));
                     buttonCreateCard.click();
                         });
-                Thread.sleep(2000);
+
+        try {
+            driver.switchTo().alert().accept();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        Thread.sleep(2000);
     }
 
     private String createCrudAppTestTask() throws InterruptedException {
