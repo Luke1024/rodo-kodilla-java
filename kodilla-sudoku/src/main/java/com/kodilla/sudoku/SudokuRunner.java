@@ -1,11 +1,11 @@
 package com.kodilla.sudoku;
 
+import com.kodilla.sudoku.game.SudokuManager;
+
 public class SudokuRunner {
+    private static SudokuManager sudokuManager = new SudokuManager();
+
     public static void main(String[] args ) {
-        boolean gameFinished = false;
-        while (!gameFinished) {
-            SudokuRunner theGame = new SudokuRunner();
-            gameFinished = theGame.resolveSudoku();
-        }
+        sudokuManager.runSudoku();
     }
 }
