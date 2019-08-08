@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class ShopServiceTestSuite {
     @Autowired
     private ShopService shopService;
-
+    @Autowired
     private OrderFacade orderFacade;
 
     @Test
@@ -74,7 +74,7 @@ public class ShopServiceTestSuite {
         try {
             orderFacade.processOrder(order,1L);
         } catch (OrderProcessingException e) {
-            // should be handled
+
         }
     }
 }
